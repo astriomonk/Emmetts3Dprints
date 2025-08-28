@@ -125,4 +125,120 @@
       <div class="row">
         <button class="btn buy" type="button" data-name="Name Keychain (Custom)" data-price="5.00">Reserve</button>
         <button class="btn alt" type="button" onclick="addPhoto('img3')">Add Photo</button>
-        <input type="file" id
+        <input type="file" id="file3" accept="image/*" onchange="loadPhoto(event,'img3')"/>
+      </div>
+    </div>
+  </article>
+
+  <!-- Frontman Masks -->
+  <article class="card" data-tags="mask">
+    <div class="media" id="img4">🎭</div>
+    <div class="content">
+      <div class="row">
+        <h3 style="margin:0">Frontman Masks</h3>
+        <span class="badge">Hot</span>
+      </div>
+      <div class="row">
+        <div class="price">$8.00</div>
+        <div class="stock">In stock</div>
+      </div>
+      <p class="desc">Angular and shiny. Perfect for costumes.</p>
+      <div class="row">
+        <button class="btn buy" type="button" data-name="Frontman Mask" data-price="8.00">Reserve</button>
+        <button class="btn alt" type="button" onclick="addPhoto('img4')">Add Photo</button>
+        <input type="file" id="file4" accept="image/*" onchange="loadPhoto(event,'img4')"/>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section style="margin-top:20px" id="order">
+  <h2 style="margin:0 0 8px">Reserve / Order</h2>
+  <form id="orderForm">
+    <div class="two">
+      <div>
+        <label for="buyer">Your name</label>
+        <input id="buyer" name="buyer" placeholder="Your name" required />
+      </div>
+      <div>
+        <label for="contact">Contact (IG, phone, or email)</label>
+        <input id="contact" name="contact" placeholder="@yourhandle or number" required />
+      </div>
+    </div>
+    <div class="two">
+      <div>
+        <label for="item">Item</label>
+        <select id="item" name="item" required>
+          <option value="Keyboard Fidgets">Keyboard Fidgets</option>
+          <option value="Infinity Cube">Infinity Cube</option>
+          <option value="Name Keychain (Custom)">Name Keychain (Custom)</option>
+          <option value="Frontman Mask">Frontman Mask</option>
+        </select>
+      </div>
+      <div>
+        <label for="qty">Qty</label>
+        <input id="qty" name="qty" type="number" min="1" value="1" required />
+      </div>
+    </div>
+    <label for="details">Notes (color, name, etc.)</label>
+    <textarea id="details" name="details" rows="3" placeholder="e.g., Keychain name: Aiden, color: blue"></textarea>
+    <div class="row">
+      <button class="btn buy" type="submit">Send Order (Email)</button>
+      <span class="muted">Pay on pickup.</span>
+    </div>
+  </form>
+</section>
+
+<section class="footer">
+  <p class="muted">© <span id="year"></span> Student Seller</p>
+</section>
+</main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Reserve buttons
+  document.querySelectorAll('.card .btn.buy[type="button"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('item').value = btn.dataset.name;
+      document.getElementById('qty').focus();
+      window.scrollTo({ top: document.getElementById('order').offsetTop - 20, behavior: 'smooth' });
+    });
+  });
+
+  // Email order
+  document.getElementById('orderForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const buyer = data.get('buyer');
+    const contact = data.get('contact');
+    const item = data.get('item');
+    const qty = data.get('qty');
+    const details = data.get('details') || '';
+    const subject = encodeURIComponent(`Order: ${item} x${qty} — ${buyer}`);
+    const body = encodeURIComponent(
+      `Name: ${buyer}\nContact: ${contact}\nItem: ${item}\nQty: ${qty}\nNotes: ${details}\n\nSent from School Shop`
+    );
+    const yourEmail = "youremail@example.com"; // replace with your email
+    window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
+  });
+
+  // Add Photo functions
+  function addPhoto(id){
+    document.getElementById('file'+id.slice(-1)).click();
+  }
+
+  function loadPhoto(event, id){
+    const file = event.target.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const imgDiv = document.getElementById(id);
+        imgDiv.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover"/>`;
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
+</body>
+</html>
