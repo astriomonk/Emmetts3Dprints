@@ -88,7 +88,7 @@
           </div>
           <p class="desc">Clicky and satisfying! Great for focus.</p>
           <div class="row">
-            <button class="btn buy" data-name="Keyboard Fidgets" data-price="4.00">Reserve</button>
+            <button class="btn buy" type="button" data-name="Keyboard Fidgets" data-price="4.00">Reserve</button>
           </div>
         </div>
       </article>
@@ -107,7 +107,7 @@
           </div>
           <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
           <div class="row">
-            <button class="btn buy" data-name="Infinity Cube" data-price="6.00">Reserve</button>
+            <button class="btn buy" type="button" data-name="Infinity Cube" data-price="6.00">Reserve</button>
           </div>
         </div>
       </article>
@@ -126,7 +126,7 @@
           </div>
           <p class="desc">Pick your name and color. Ready next day.</p>
           <div class="row">
-            <button class="btn buy" data-name="Name Keychain (Custom)" data-price="5.00">Reserve</button>
+            <button class="btn buy" type="button" data-name="Name Keychain (Custom)" data-price="5.00">Reserve</button>
           </div>
         </div>
       </article>
@@ -145,7 +145,7 @@
           </div>
           <p class="desc">Angular and shiny. Perfect for costumes.</p>
           <div class="row">
-            <button class="btn buy" data-name="Frontman Mask" data-price="8.00">Reserve</button>
+            <button class="btn buy" type="button" data-name="Frontman Mask" data-price="8.00">Reserve</button>
           </div>
         </div>
       </article>
@@ -153,7 +153,7 @@
 
     <section style="margin-top:20px" id="order">
       <h2 style="margin:0 0 8px">Reserve / Order</h2>
-      <form onsubmit="return sendOrder(this)">
+      <form id="orderForm">
         <div class="two">
           <div>
             <label for="buyer">Your name</label>
@@ -194,10 +194,11 @@
   </main>
 
   <script>
+    // Set footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Reserve button fixes (sets correct select value)
-    document.querySelectorAll('.btn.buy').forEach(btn => {
+    // Product card "Reserve" buttons
+    document.querySelectorAll('.card .btn.buy[type="button"]').forEach(btn => {
       btn.addEventListener('click', () => {
         const itemName = btn.dataset.name;
         const select = document.getElementById('item');
@@ -207,7 +208,10 @@
       });
     });
 
-    function sendOrder(form){
+    // Form submission via mailto without resetting the select
+    document.getElementById('orderForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const form = e.target;
       const data = new FormData(form);
       const buyer = data.get('buyer');
       const contact = data.get('contact');
@@ -218,10 +222,9 @@
       const body = encodeURIComponent(
         `Name: ${buyer}\nContact: ${contact}\nItem: ${item}\nQty: ${qty}\nNotes: ${details}\n\nSent from School Shop`
       );
-      const yourEmail = "Emmettemm15@gmail.com"; // Change to your real email
+      const yourEmail = "youremail@example.com"; // Change this to your email
       window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
-      return false;
-    }
+    });
   </script>
 </body>
 </html>
