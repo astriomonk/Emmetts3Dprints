@@ -3,112 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My School Shop</title>
+<title>School Shop — Student Seller</title>
 <style>
-    body { font-family: Arial, sans-serif; background: #fff; margin: 0; padding: 0; }
-    header { background: #333; color: white; text-align: center; padding: 15px; font-size: 24px; }
-    .container { max-width: 800px; margin: auto; padding: 20px; }
-    h2 { text-align: center; margin-bottom: 20px; }
-    .items { display: flex; flex-wrap: wrap; justify-content: space-around; }
-    .item { width: 180px; text-align: center; margin: 10px; border: 1px solid #ccc; padding: 10px; }
-    .item img { max-width: 100%; height: auto; }
-    .item h3 { margin: 10px 0 5px; }
-    .item p { color: green; font-weight: bold; margin: 5px 0; }
-    .form-section { margin-top: 30px; }
-    form { display: flex; flex-direction: column; gap: 10px; }
-    input, select, textarea, button { font-size: 16px; padding: 8px; }
-    button { background: #28a745; color: white; border: none; cursor: pointer; }
-    button:hover { background: #218838; }
-    .photo-preview img { max-width: 150px; margin-top: 10px; }
+:root {
+  --bg:#0f1115; --card:#161a22; --muted:#8b95a7; --text:#e8ecf3; --brand:#6be675;
+  --brand-2:#67b7ff; --accent:#ffcf5c; --danger:#ff6b6b; --ring:0 0 0 3px #67b7ff33;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:linear-gradient(180deg,#0c0f14,#0f1115 25%,#0f1115);color:var(--text);}
+header{position:sticky;top:0;background:#0f1115cc;backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #202737;z-index:10;}
+.wrap{max-width:1000px;margin:auto;padding:16px;}
+.topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.3px;}
+.brand .logo{width:34px;height:34px;border-radius:9px;background:conic-gradient(from 210deg at 50% 50%, #67b7ff, #6be675, #ffcf5c, #67b7ff);box-shadow:0 6px 20px #67b7ff33;}
+.chipbar{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{padding:8px 12px;border:1px solid #2a3142;border-radius:999px;cursor:pointer;background:#121621;}
+.chip[aria-pressed="true"]{background:#1a2130;border-color:#3a4762;box-shadow:var(--ring);}
+.hero{display:grid;gap:14px;padding:28px 16px 8px;}
+.hero h1{margin:0;font-size:clamp(22px,4vw,34px);}
+.hero p{margin:0;color:var(--muted);}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr);}
+@media (max-width:760px){.grid{grid-template-columns:repeat(6,1fr);}}
+.card{grid-column:span 6;background:var(--card);border:1px solid #202737;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s ease, box-shadow .12s ease;cursor:pointer;}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 28px #00000066;}
+.media{aspect-ratio:16/10;background:#121621;display:grid;place-items:center;font-size:52px;}
+.content{padding:14px;display:grid;gap:10px;}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.price{font-weight:800;}
+.badge{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #2a3142;color:#ccd6e8;background:#121621;}
+.desc{color:var(--muted);font-size:14px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:10px;border:1px solid #2a3142;background:#141a26;color:var(--text);cursor:pointer;}
+.btn:focus-visible{outline:none;box-shadow:var(--ring);}
+.btn.alt{background:#141926;}
+.btn.alt:hover{filter:brightness(1.06);}
+.footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-top:22px;}
+form{display:grid;gap:10px;background:var(--card);border:1px solid #202737;border-radius:14px;padding:16px;}
+input,select,textarea{width:100%;padding:12px 12px;border-radius:10px;border:1px solid #2a3142;background:#111622;color:var(--text);}
+input:focus,select:focus,textarea:focus{outline:none;box-shadow:var(--ring);border-color:#3a4762;}
+.two{display:grid;gap:10px;grid-template-columns:1fr 1fr;}
+@media (max-width:640px){.two{grid-template-columns:1fr;}}
+.muted{color:var(--muted);font-size:13px;}
+.pill{padding:2px 8px;border-radius:999px;background:#172033;border:1px solid #2b3450;color:#cde1ff;font-size:12px;}
+.stock{font-size:12px;color:#a6b2c7;}
+.note{font-size:12px;color:#9fb0c9;}
+.card.selected{outline:3px solid rgba(103,183,255,0.25);box-shadow:0 10px 30px rgba(0,0,0,0.5);}
 </style>
 </head>
 <body>
-<header>My School Shop</header>
-<div class="container">
-    <h2>Items for Sale</h2>
-    <div class="items">
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Keyboard Fidget">
-            <h3>Keyboard Fidget</h3>
-            <p>$3</p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Infinity Cube">
-            <h3>Infinity Cube</h3>
-            <p>$4</p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Name Keychain">
-            <h3>Name Keychain</h3>
-            <p>$2</p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Frontman Mask">
-            <h3>Frontman Mask</h3>
-            <p>$5</p>
-        </div>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="logo"></div>
+      <span>School Shop</span>
     </div>
-
-    <div class="form-section" id="order">
-        <h2>Reserve an Item</h2>
-        <form id="orderForm">
-            <select name="item" id="item" required>
-                <option value="">-- Select an item --</option>
-                <option value="Keyboard Fidget">Keyboard Fidget</option>
-                <option value="Infinity Cube">Infinity Cube</option>
-                <option value="Name Keychain">Name Keychain</option>
-                <option value="Frontman Mask">Frontman Mask</option>
-            </select>
-            <input type="number" name="qty" id="qty" placeholder="Quantity" required min="1">
-            <input type="text" name="name" id="name" placeholder="Your Name" required>
-            <textarea name="message" id="message" placeholder="Additional details (optional)"></textarea>
-            
-            <!-- Add Photo Button -->
-            <label for="photo">Add a Photo (optional):</label>
-            <input type="file" id="photo" accept="image/*">
-            <div class="photo-preview" id="photoPreview"></div>
-            
-            <button type="submit">Send Email</button>
-        </form>
+    <div class="chipbar" role="toolbar" aria-label="Filter products">
+      <button class="chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="fidget">Fidgets</button>
+      <button class="chip" data-filter="custom">Custom</button>
+      <button class="chip" data-filter="mask">Masks</button>
     </div>
-</div>
+  </div>
+</header>
 
-<script>
-document.getElementById('photo').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-            const img = document.createElement('img');
-            img.src = evt.target.result;
-            const preview = document.getElementById('photoPreview');
-            preview.innerHTML = '';
-            preview.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-    }
-});
+<main class="wrap">
+  <section class="hero">
+    <h1>Stuff I Sell at School</h1>
+    <p>Keyboard fidgets, infinity cubes, name keychains, and Frontman masks. Quick pick-ups during passing periods and lunch!</p>
+    <span class="pill">Use the form below to reserve an item.</span>
+  </section>
 
-document.getElementById('orderForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Stop default form submission
+  <section class="grid" id="products">
+    <article class="card" data-tags="fidget" data-name="Keyboard Fidgets">
+      <div class="media">⌨️</div>
+      <div class="content">
+        <div class="row"><h3 style="margin:0">Keyboard Fidgets</h3><span class="badge">Popular</span></div>
+        <div class="row"><div class="price">$4.00</div><div class="stock">In stock</div></div>
+        <p class="desc">Clicky and satisfying! Great for focus.</p>
+        <div class="row"><button class="btn alt btn-photo" type="button">Add photo</button></div>
+      </div>
+    </article>
 
-    const item = document.getElementById('item').value;
-    const qty = document.getElementById('qty').value;
-    const name = document.getElementById('name').value;
-    const message = document.getElementById('message').value;
-
-    if (!item || !qty || !name) {
-        alert('Please fill out all required fields.');
-        return;
-    }
-
-    const subject = encodeURIComponent(`Order for ${item}`);
-    const body = encodeURIComponent(`Item: ${item}\nQuantity: ${qty}\nName: ${name}\nMessage: ${message}`);
-    const mailtoLink = `mailto:emmettemm15@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-
-    // ✅ DO NOT reset form, keep selection
-});
-</script>
-</body>
-</html>
+    <article class="card" data-tags="fidget" data-name="Infinity Cube">
+      <div class="media">🧊</div>
+      <div class="content">
+        <div class="row"><h3 style="margin:0">Infinity Cubes</h3><span class="badge">New</span></div>
+        <div class="row"><div class="price">$6.0
