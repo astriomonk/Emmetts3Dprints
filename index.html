@@ -44,10 +44,8 @@
     .two{display:grid;gap:10px;grid-template-columns:1fr 1fr}
     @media (max-width:640px){.two{grid-template-columns:1fr}}
     .muted{color:var(--muted);font-size:13px}
-    .hide{display:none !important}
     .pill{padding:2px 8px;border-radius:999px;background:#172033;border:1px solid #2b3450;color:#cde1ff;font-size:12px}
     .stock{font-size:12px;color:#a6b2c7}
-    .note{font-size:12px;color:#9fb0c9}
   </style>
 </head>
 <body>
@@ -194,25 +192,22 @@
   </main>
 
   <script>
-    // Set footer year
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Product card "Reserve" buttons
+    // Reserve buttons
     document.querySelectorAll('.card .btn.buy[type="button"]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const itemName = btn.dataset.name;
-        const select = document.getElementById('item');
-        select.value = itemName;
+        document.getElementById('item').value = btn.dataset.name;
         document.getElementById('qty').focus();
         window.scrollTo({ top: document.getElementById('order').offsetTop - 20, behavior: 'smooth' });
       });
     });
 
-    // Form submission via mailto without resetting the select
+    // Send order via email
     document.getElementById('orderForm').addEventListener('submit', e => {
       e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
+      const data = new FormData(e.target);
       const buyer = data.get('buyer');
       const contact = data.get('contact');
       const item = data.get('item');
@@ -222,7 +217,7 @@
       const body = encodeURIComponent(
         `Name: ${buyer}\nContact: ${contact}\nItem: ${item}\nQty: ${qty}\nNotes: ${details}\n\nSent from School Shop`
       );
-      const yourEmail = "youremail@example.com"; // Change this to your email
+      const yourEmail = "youremail@example.com"; // Replace with your email
       window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
     });
   </script>
