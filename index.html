@@ -12,7 +12,6 @@
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:linear-gradient(180deg,#0c0f14,#0f1115 25%,#0f1115);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    a{color:var(--brand-2);text-decoration:none}
     header{position:sticky;top:0;background:#0f1115cc;backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #202737;z-index:10}
     .wrap{max-width:1000px;margin:auto;padding:16px}
     .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between}
@@ -48,11 +47,6 @@
     .hide{display:none !important}
     .pill{padding:2px 8px;border-radius:999px;background:#172033;border:1px solid #2b3450;color:#cde1ff;font-size:12px}
     .stock{font-size:12px;color:#a6b2c7}
-    .switch{display:flex;align-items:center;gap:10px}
-    .switch input{appearance:none;width:38px;height:22px;background:#2a3142;border-radius:999px;position:relative;outline:none;border:1px solid #364058;cursor:pointer}
-    .switch input:checked{background:#1f7df5}
-    .switch input::after{content:"";position:absolute;inset:3px auto 3px 3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .15s ease;left:3px}
-    .switch input:checked::after{left:19px}
     .note{font-size:12px;color:#9fb0c9}
   </style>
 </head>
@@ -60,7 +54,7 @@
   <header>
     <div class="wrap topbar">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <div class="logo"></div>
         <span>School Shop</span>
       </div>
       <div class="chipbar" role="toolbar" aria-label="Filter products">
@@ -69,24 +63,20 @@
         <button class="chip" data-filter="custom">Custom</button>
         <button class="chip" data-filter="mask">Masks</button>
       </div>
-      <label class="switch" title="Toggle compact view">
-        <input id="compactToggle" type="checkbox" />
-        <span class="note">Compact</span>
-      </label>
     </div>
   </header>
 
   <main class="wrap">
     <section class="hero">
       <h1>Stuff I Sell at School</h1>
-      <p>Quick pick-ups between classes. Cash or CashApp. Ask about bulk deals!</p>
-      <span class="pill">DM or use the form below to reserve.</span>
+      <p>Keyboard fidgets, infinity cubes, name keychains, and Frontman masks. Quick pick-ups during passing periods and lunch!</p>
+      <span class="pill">Use the form below to reserve an item.</span>
     </section>
 
     <section class="grid" id="products">
       <!-- Keyboard Fidgets -->
       <article class="card" data-tags="fidget">
-        <div class="media" aria-label="Keyboard fidget image">⌨️</div>
+        <div class="media">⌨️</div>
         <div class="content">
           <div class="row">
             <h3 style="margin:0">Keyboard Fidgets</h3>
@@ -96,17 +86,16 @@
             <div class="price">$4.00</div>
             <div class="stock">In stock</div>
           </div>
-          <p class="desc">Clicky and satisfying! Great for focus. Multiple switch feels.</p>
+          <p class="desc">Clicky and satisfying! Great for focus.</p>
           <div class="row">
             <button class="btn buy" data-name="Keyboard Fidgets" data-price="4.00">Reserve</button>
-            <button class="btn alt" onclick="swapImage(this)">Add photo</button>
           </div>
         </div>
       </article>
 
       <!-- Infinity Cubes -->
       <article class="card" data-tags="fidget">
-        <div class="media" aria-label="Infinity cube image">🧊</div>
+        <div class="media">🧊</div>
         <div class="content">
           <div class="row">
             <h3 style="margin:0">Infinity Cubes</h3>
@@ -119,14 +108,13 @@
           <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
           <div class="row">
             <button class="btn buy" data-name="Infinity Cube" data-price="6.00">Reserve</button>
-            <button class="btn alt" onclick="swapImage(this)">Add photo</button>
           </div>
         </div>
       </article>
 
       <!-- Name Keychains -->
       <article class="card" data-tags="custom">
-        <div class="media" aria-label="Name keychain image">🔑</div>
+        <div class="media">🔑</div>
         <div class="content">
           <div class="row">
             <h3 style="margin:0">Name Keychains (Custom)</h3>
@@ -136,17 +124,16 @@
             <div class="price">$5.00</div>
             <div class="stock">Made to order</div>
           </div>
-          <p class="desc">Pick your name and color. Ready by next day (most orders).</p>
+          <p class="desc">Pick your name and color. Ready next day.</p>
           <div class="row">
             <button class="btn buy" data-name="Name Keychain (Custom)" data-price="5.00">Reserve</button>
-            <button class="btn alt" onclick="swapImage(this)">Add photo</button>
           </div>
         </div>
       </article>
 
       <!-- Frontman Masks -->
       <article class="card" data-tags="mask">
-        <div class="media" aria-label="Frontman mask image">🎭</div>
+        <div class="media">🎭</div>
         <div class="content">
           <div class="row">
             <h3 style="margin:0">Frontman Masks</h3>
@@ -156,10 +143,9 @@
             <div class="price">$8.00</div>
             <div class="stock">In stock</div>
           </div>
-          <p class="desc">Angular, shiny, and comfy strap. Perfect for costumes.</p>
+          <p class="desc">Angular and shiny. Perfect for costumes.</p>
           <div class="row">
             <button class="btn buy" data-name="Frontman Mask" data-price="8.00">Reserve</button>
-            <button class="btn alt" onclick="swapImage(this)">Add photo</button>
           </div>
         </div>
       </article>
@@ -181,11 +167,11 @@
         <div class="two">
           <div>
             <label for="item">Item</label>
-            <select id="item" name="item">
-              <option>Keyboard Fidgets</option>
-              <option>Infinity Cube</option>
-              <option>Name Keychain (Custom)</option>
-              <option>Frontman Mask</option>
+            <select id="item" name="item" required>
+              <option value="Keyboard Fidgets">Keyboard Fidgets</option>
+              <option value="Infinity Cube">Infinity Cube</option>
+              <option value="Name Keychain (Custom)">Name Keychain (Custom)</option>
+              <option value="Frontman Mask">Frontman Mask</option>
             </select>
           </div>
           <div>
@@ -193,88 +179,34 @@
             <input id="qty" name="qty" type="number" min="1" value="1" required />
           </div>
         </div>
-        <label for="details">Notes (color, name, drop-off time, etc.)</label>
+        <label for="details">Notes (color, name, etc.)</label>
         <textarea id="details" name="details" rows="3" placeholder="e.g., Keychain name: Aiden, color: blue"></textarea>
         <div class="row">
           <button class="btn buy" type="submit">Send Order (Email)</button>
-          <span class="muted">No payment online—pay on pickup.</span>
+          <span class="muted">Pay on pickup.</span>
         </div>
       </form>
-      <p class="note">Tip: replace emoji with real photos by clicking “Add photo” on each product.</p>
     </section>
 
     <section class="footer">
-      <div class="grid">
-        <div style="grid-column:span 6">
-          <strong>Hours</strong><br />
-          Passing periods & lunch. Message to confirm.
-        </div>
-        <div style="grid-column:span 6">
-          <strong>Deals</strong><br />
-          3+ items: ask about bundle pricing.
-        </div>
-      </div>
-      <p class="muted" style="margin-top:10px">© <span id="year"></span> Student Seller. This is a student-run shop and not affiliated with the school.</p>
+      <p class="muted">© <span id="year"></span> Student Seller</p>
     </section>
   </main>
 
   <script>
-    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Filter chips
-    const chips = [...document.querySelectorAll('.chip')];
-    const cards = [...document.querySelectorAll('.card')];
-    chips.forEach(chip=>{
-      chip.addEventListener('click', ()=>{
-        chips.forEach(c=>c.setAttribute('aria-pressed','false'));
-        chip.setAttribute('aria-pressed','true');
-        const tag = chip.dataset.filter;
-        cards.forEach(card=>{
-          const has = card.dataset.tags.includes(tag);
-          card.classList.toggle('hide', tag!=='all' && !has);
-        });
-      });
-    });
-
-    // Compact toggle
-    const compact = document.getElementById('compactToggle');
-    compact.addEventListener('change', ()=>{
-      document.querySelectorAll('.card .media').forEach(m=>{
-        m.style.aspectRatio = compact.checked ? '16/5' : '16/10';
-      });
-      document.querySelectorAll('.desc').forEach(d=>{
-        d.style.display = compact.checked ? 'none' : '';
-      });
-    });
-
-    // “Reserve” shortcut pre-fills form
-    document.querySelectorAll('.btn.buy').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.getElementById('item').value = btn.dataset.name;
+    // Reserve button fixes (sets correct select value)
+    document.querySelectorAll('.btn.buy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const itemName = btn.dataset.name;
+        const select = document.getElementById('item');
+        select.value = itemName;
         document.getElementById('qty').focus();
         window.scrollTo({ top: document.getElementById('order').offsetTop - 20, behavior: 'smooth' });
       });
     });
 
-    // Swap emoji for a photo (lets you add your own images quickly)
-    function swapImage(el){
-      const card = el.closest('.card');
-      const media = card.querySelector('.media');
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = e=>{
-        const file = e.target.files[0];
-        if(!file) return;
-        const reader = new FileReader();
-        reader.onload = ev => { media.innerHTML = ''; media.style.backgroundImage = `url(${ev.target.result})`; media.style.backgroundSize = 'cover'; media.style.backgroundPosition='center'; };
-        reader.readAsDataURL(file);
-      };
-      input.click();
-    }
-
-    // Email order (mailto)
     function sendOrder(form){
       const data = new FormData(form);
       const buyer = data.get('buyer');
@@ -286,8 +218,7 @@
       const body = encodeURIComponent(
         `Name: ${buyer}\nContact: ${contact}\nItem: ${item}\nQty: ${qty}\nNotes: ${details}\n\nSent from School Shop`
       );
-      // TODO: put your email below
-      const yourEmail = "Emmettemm15@gmail.com";
+      const yourEmail = "emmettemm15@gmail.com"; // Change to your real email
       window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
       return false;
     }
