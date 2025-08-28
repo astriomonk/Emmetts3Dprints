@@ -5,21 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>School Shop</title>
 <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
-    header { background: #007bff; color: white; text-align: center; padding: 15px; font-size: 24px; }
-    .container { max-width: 900px; margin: auto; padding: 20px; }
-    .items { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-    .item { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; width: 200px; text-align: center; }
-    .item img { max-width: 100%; border-radius: 8px; }
-    .item h3 { margin: 10px 0; }
-    .item p { margin: 5px 0; font-weight: bold; color: #007bff; }
-    .btn { display: inline-block; margin-top: 10px; padding: 8px 12px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; cursor: pointer; }
-    .btn:hover { background: #218838; }
-    .form-section { margin-top: 40px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    body { font-family: Arial, sans-serif; background: #fff; margin: 0; padding: 0; }
+    header { background: #333; color: white; text-align: center; padding: 15px; font-size: 24px; }
+    .container { max-width: 800px; margin: auto; padding: 20px; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    .items { display: flex; flex-wrap: wrap; justify-content: space-around; }
+    .item { width: 180px; text-align: center; margin: 10px; border: 1px solid #ccc; padding: 10px; }
+    .item img { max-width: 100%; height: auto; }
+    .item h3 { margin: 10px 0 5px; }
+    .item p { color: green; font-weight: bold; margin: 5px 0; }
+    .btn { background: #007bff; color: white; padding: 8px 12px; border: none; cursor: pointer; margin-top: 8px; }
+    .btn:hover { background: #0056b3; }
+    .form-section { margin-top: 30px; }
     form { display: flex; flex-direction: column; gap: 10px; }
-    input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-    button { padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
-    button:hover { background: #0056b3; }
+    input, select, textarea, button { font-size: 16px; padding: 8px; }
+    button { background: #28a745; color: white; border: none; cursor: pointer; }
+    button:hover { background: #218838; }
 </style>
 </head>
 <body>
@@ -91,9 +92,8 @@ document.querySelectorAll('.btn.buy').forEach(btn => {
     });
 });
 
-// Handle email sending without refreshing
 document.getElementById('orderForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Stop refresh
+    event.preventDefault();
 
     const item = document.getElementById('item').value;
     const qty = document.getElementById('qty').value;
@@ -107,125 +107,6 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
 
     const subject = encodeURIComponent(`Order for ${item}`);
     const body = encodeURIComponent(`Item: ${item}\nQuantity: ${qty}\nName: ${name}\nMessage: ${message}`);
-    
-    // Replace with your real email
-    const mailtoLink = `mailto:youremail@example.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-});
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>School Shop</title>
-<style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
-    header { background: #007bff; color: white; text-align: center; padding: 15px; font-size: 24px; }
-    .container { max-width: 900px; margin: auto; padding: 20px; }
-    .items { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-    .item { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; width: 200px; text-align: center; }
-    .item img { max-width: 100%; border-radius: 8px; }
-    .item h3 { margin: 10px 0; }
-    .item p { margin: 5px 0; font-weight: bold; color: #007bff; }
-    .btn { display: inline-block; margin-top: 10px; padding: 8px 12px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; cursor: pointer; }
-    .btn:hover { background: #218838; }
-    .form-section { margin-top: 40px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    form { display: flex; flex-direction: column; gap: 10px; }
-    input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-    button { padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
-    button:hover { background: #0056b3; }
-</style>
-</head>
-<body>
-<header>My School Shop</header>
-<div class="container">
-    <h2>Items for Sale</h2>
-    <div class="items">
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Keyboard Fidget">
-            <h3>Keyboard Fidget</h3>
-            <p>$3</p>
-            <button class="btn buy" data-name="Keyboard Fidget">Reserve</button>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Infinity Cube">
-            <h3>Infinity Cube</h3>
-            <p>$4</p>
-            <button class="btn buy" data-name="Infinity Cube">Reserve</button>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Name Keychain">
-            <h3>Name Keychain</h3>
-            <p>$2</p>
-            <button class="btn buy" data-name="Name Keychain">Reserve</button>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Frontman Mask">
-            <h3>Frontman Mask</h3>
-            <p>$5</p>
-            <button class="btn buy" data-name="Frontman Mask">Reserve</button>
-        </div>
-    </div>
-
-    <div class="form-section" id="order">
-        <h2>Reserve an Item</h2>
-        <form id="orderForm">
-            <select name="item" id="item" required>
-                <option value="">-- Select an item --</option>
-                <option value="Keyboard Fidget">Keyboard Fidget</option>
-                <option value="Infinity Cube">Infinity Cube</option>
-                <option value="Name Keychain">Name Keychain</option>
-                <option value="Frontman Mask">Frontman Mask</option>
-            </select>
-            <input type="number" name="qty" id="qty" placeholder="Quantity" required min="1">
-            <input type="text" name="name" id="name" placeholder="Your Name" required>
-            <textarea name="message" id="message" placeholder="Additional details (optional)"></textarea>
-            <button type="submit">Send Email</button>
-        </form>
-    </div>
-</div>
-
-<script>
-document.querySelectorAll('.btn.buy').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const itemName = btn.dataset.name;
-        const select = document.getElementById('item');
-
-        [...select.options].forEach(opt => {
-            if (opt.textContent === itemName) {
-                select.value = opt.value;
-            }
-        });
-
-        document.getElementById('qty').focus();
-        window.scrollTo({
-            top: document.getElementById('order').offsetTop - 20,
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Handle email sending without refreshing
-document.getElementById('orderForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Stop refresh
-
-    const item = document.getElementById('item').value;
-    const qty = document.getElementById('qty').value;
-    const name = document.getElementById('name').value;
-    const message = document.getElementById('message').value;
-
-    if (!item || !qty || !name) {
-        alert('Please fill out all required fields.');
-        return;
-    }
-
-    const subject = encodeURIComponent(`Order for ${item}`);
-    const body = encodeURIComponent(`Item: ${item}\nQuantity: ${qty}\nName: ${name}\nMessage: ${message}`);
-    
-    // Replace with your real email
     const mailtoLink = `mailto:emmettemm15@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
 });
