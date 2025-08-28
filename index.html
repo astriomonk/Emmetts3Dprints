@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School Shop — Student Seller</title>
+  <meta name="description" content="Keyboard fidgets, infinity cubes, name keychains, and Frontman masks." />
+  <style>
+    :root{
+      --bg:#0f1115; --card:#161a22; --muted:#8b95a7; --text:#e8ecf3; --brand:#6be675; --brand-2:#67b7ff; --accent:#ffcf5c; --danger:#ff6b6b;
+      --ring: 0 0 0 3px #67b7ff33;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#0c0f14,#0f1115 25%,#0f1115);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    header{position:sticky;top:0;background:#0f1115cc;backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #202737;z-index:10}
+    .wrap{max-width:1000px;margin:auto;padding:16px}
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:34px;height:34px;border-radius:9px;background:conic-gradient(from 210deg at 50% 50%, #67b7ff, #6be675, #ffcf5c, #67b7ff);box-shadow:0 6px 20px #67b7ff33}
+    .chipbar{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{padding:8px 12px;border:1px solid #2a3142;border-radius:999px;cursor:pointer;background:#121621}
+    .chip[aria-pressed="true"]{background:#1a2130;border-color:#3a4762;box-shadow:var(--ring)}
+    .hero{display:grid;gap:14px;padding:28px 16px 8px}
+    .hero h1{margin:0;font-size:clamp(22px,4vw,34px)}
+    .hero p{margin:0;color:var(--muted)}
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+    @media (max-width:760px){.grid{grid-template-columns:repeat(6,1fr)}}
+    .card{grid-column:span 6;background:var(--card);border:1px solid #202737;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s ease, box-shadow .12s ease}
+    .card:hover{transform:translateY(-2px);box-shadow:0 8px 28px #00000066}
+    .media{aspect-ratio:16/10;background:#121621;display:grid;place-items:center;font-size:52px;overflow:hidden}
+    .content{padding:14px;display:grid;gap:10px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .price{font-weight:800}
+    .badge{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #2a3142;color:#ccd6e8;background:#121621}
+    .desc{color:var(--muted);font-size:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:10px;border:1px solid #2a3142;background:#141a26;color:var(--text);cursor:pointer}
+    .btn:focus-visible{outline:none;box-shadow:var(--ring)}
+    .btn.buy{background:linear-gradient(180deg,#1c7426,#0d5817);border-color:#1b7d2b}
+    .btn.alt{background:#141926}
+    .footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-top:22px}
+    form{display:grid;gap:10px;background:var(--card);border:1px solid #202737;border-radius:14px;padding:16px}
+    input,select,textarea{width:100%;padding:12px 12px;border-radius:10px;border:1px solid #2a3142;background:#111622;color:var(--text)}
+    input:focus,select:focus,textarea:focus{outline:none;box-shadow:var(--ring);border-color:#3a4762}
+    .two{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+    @media (max-width:640px){.two{grid-template-columns:1fr}}
+    .muted{color:var(--muted);font-size:13px}
+    .pill{padding:2px 8px;border-radius:999px;background:#172033;border:1px solid #2b3450;color:#cde1ff;font-size:12px}
+    .stock{font-size:12px;color:#a6b2c7}
+    input[type="file"]{display:none}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="logo"></div>
+      <span>School Shop</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="hero">
+  <h1>Stuff I Sell at School</h1>
+  <p>Keyboard fidgets, infinity cubes, name keychains, and Frontman masks. Quick pick-ups during passing periods and lunch!</p>
+  <span class="pill">Use the form below to reserve an item.</span>
+</section>
+
+<section class="grid" id="products">
+  <!-- Keyboard Fidgets -->
+  <article class="card" data-tags="fidget">
+    <div class="media" id="img1">⌨️</div>
+    <div class="content">
+      <div class="row">
+        <h3 style="margin:0">Keyboard Fidgets</h3>
+        <span class="badge">Popular</span>
+      </div>
+      <div class="row">
+        <div class="price">$4.00</div>
+        <div class="stock">In stock</div>
+      </div>
+      <p class="desc">Clicky and satisfying! Great for focus.</p>
+      <div class="row">
+        <button class="btn buy" type="button" data-name="Keyboard Fidgets" data-price="4.00">Reserve</button>
+        <button class="btn alt" type="button" onclick="addPhoto('img1')">Add Photo</button>
+        <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'img1')"/>
+      </div>
+    </div>
+  </article>
+
+  <!-- Infinity Cubes -->
+  <article class="card" data-tags="fidget">
+    <div class="media" id="img2">🧊</div>
+    <div class="content">
+      <div class="row">
+        <h3 style="margin:0">Infinity Cubes</h3>
+        <span class="badge">New</span>
+      </div>
+      <div class="row">
+        <div class="price">$6.00</div>
+        <div class="stock">Low stock</div>
+      </div>
+      <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
+      <div class="row">
+        <button class="btn buy" type="button" data-name="Infinity Cube" data-price="6.00">Reserve</button>
+        <button class="btn alt" type="button" onclick="addPhoto('img2')">Add Photo</button>
+        <input type="file" id="file2" accept="image/*" onchange="loadPhoto(event,'img2')"/>
+      </div>
+    </div>
+  </article>
+
+  <!-- Name Keychains -->
+  <article class="card" data-tags="custom">
+    <div class="media" id="img3">🔑</div>
+    <div class="content">
+      <div class="row">
+        <h3 style="margin:0">Name Keychains (Custom)</h3>
+        <span class="badge">Custom</span>
+      </div>
+      <div class="row">
+        <div class="price">$5.00</div>
+        <div class="stock">Made to order</div>
+      </div>
+      <p class="desc">Pick your name and color. Ready next day.</p>
+      <div class="row">
+        <button class="btn buy" type="button" data-name="Name Keychain (Custom)" data-price="5.00">Reserve</button>
+        <button class="btn alt" type="button" onclick="addPhoto('img3')">Add Photo</button>
+        <input type="file" id
