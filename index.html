@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>School Shop — Student Seller</title>
+<titl>Emmett3DPrints</titl></title>
 <style>
 :root{
   --bg:#0f1115; --card:#161a22; --muted:#8b95a7; --text:#e8ecf3;
@@ -64,10 +64,10 @@ input[type="file"]{display:none;}
   <div class="media" id="img1">⌨️</div>
   <div class="content">
     <div class="row"><h3>Keyboard Fidgets</h3><span class="badge">Popular</span></div>
-    <div class="row"><div class="price">$4.00</div><div class="stock">In stock</div></div>
+    <div class="row"><div class="price">$1.00 each</div><div
     <p class="desc">Clicky and satisfying! Great for focus.</p>
     <div class="row">
-      <button class="btn buy" type="button" data-name="Keyboard Fidgets">Reserve</button>
+      <button class="btn buy" type="button" data-name="Keyboard Fidgets">I want this!</button>
       <button class="btn alt" type="button" onclick="addPhoto('1')">Add Photo</button>
       <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'1')"/>
     </div>
@@ -79,10 +79,10 @@ input[type="file"]{display:none;}
   <div class="media" id="img2">🧊</div>
   <div class="content">
     <div class="row"><h3>Infinity Cube</h3><span class="badge">New</span></div>
-    <div class="row"><div class="price">$6.00</div><div class="stock">Low stock</div></div>
+    <div class="row"><div class="price">$3.00</div><div
     <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
     <div class="row">
-      <button class="btn buy" type="button" data-name="Infinity Cube">Reserve</button>
+      <button class="btn buy" type="button" data-name="Infinity Cube">I want This!</button>
       <button class="btn alt" type="button" onclick="addPhoto('2')">Add Photo</button>
       <input type="file" id="file2" accept="image/*" onchange="loadPhoto(event,'2')"/>
     </div>
@@ -94,10 +94,10 @@ input[type="file"]{display:none;}
   <div class="media" id="img3">🔑</div>
   <div class="content">
     <div class="row"><h3>Name Keychain (Custom)</h3><span class="badge">Custom</span></div>
-    <div class="row"><div class="price">$5.00</div><div class="stock">Made to order</div></div>
+    <div class="row"><div class="price">$1.00</div><div
     <p class="desc">Pick your name and color. Ready next day.</p>
     <div class="row">
-      <button class="btn buy" type="button" data-name="Name Keychain (Custom)">Reserve</button>
+      <button class="btn buy" type="button" data-name="Name Keychain (Custom)">I Want This!</button>
       <button class="btn alt" type="button" onclick="addPhoto('3')">Add Photo</button>
       <input type="file" id="file3" accept="image/*" onchange="loadPhoto(event,'3')"/>
     </div>
@@ -109,10 +109,10 @@ input[type="file"]{display:none;}
   <div class="media" id="img4">🎭</div>
   <div class="content">
     <div class="row"><h3>Frontman Mask</h3><span class="badge">Hot</span></div>
-    <div class="row"><div class="price">$8.00</div><div class="stock">In stock</div></div>
+    <div class="row"><div class="price">$10.00</div><div
     <p class="desc">Angular and shiny. Perfect for costumes.</p>
     <div class="row">
-      <button class="btn buy" type="button" data-name="Frontman Mask">Reserve</button>
+      <button class="btn buy" type="button" data-name="Frontman Mask">I Want This!</button>
       <button class="btn alt" type="button" onclick="addPhoto('4')">Add Photo</button>
       <input type="file" id="file4" accept="image/*" onchange="loadPhoto(event,'4')"/>
     </div>
@@ -122,7 +122,7 @@ input[type="file"]{display:none;}
 </section>
 
 <section id="order">
-<h2>Reserve / Order</h2>
+<h2>Buy / Order</h2>
 <form id="orderForm">
 <div class="two">
   <div><label>Your Name:<input name="buyer" required></label></div>
@@ -174,7 +174,7 @@ document.getElementById('orderForm').addEventListener('submit', e=>{
   const data = new FormData(e.target);
   const subject = encodeURIComponent(`Order: ${data.get('item')} x${data.get('qty')} — ${data.get('buyer')}`);
   const body = encodeURIComponent(`Name: ${data.get('buyer')}\nContact: ${data.get('contact')}\nItem: ${data.get('item')}\nQty: ${data.get('qty')}\nNotes: ${data.get('details')}`);
-  const yourEmail = "youremail@example.com"; // replace with your email
+  const yourEmail = "Emmettemm15@gmail.com"; // replace with your email
   window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
 });
 
