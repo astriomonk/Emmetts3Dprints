@@ -53,7 +53,7 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
 <main class="wrap">
   <section class="hero">
     <h1>Stuff I Sell at School</h1>
-    <p>Keyboard fidgets, infinity cubes, name keychains, and Frontman masks. Quick pick-ups during passing periods and lunch!</p>
+    <p>Keyboard fidgets, infinity cubes, name keychains, and Frontman masks.</p>
     <span class="pill">Use the form below to reserve an item.</span>
   </section>
 
@@ -62,10 +62,10 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img1">⌨️</div>
       <div class="content">
         <div class="row"><h3>Keyboard Fidgets</h3><span class="badge">Popular</span></div>
-        <div class="row"><div class="price">$4.00</div></div>
+        <div class="row"><div class="price">$1.00 each</div></div>
         <p class="desc">Clicky and satisfying! Great for focus.</p>
         <div class="row">
-          <button class="btn buy" type="button" data-name="Keyboard Fidgets">Reserve</button>
+          <button class="btn buy" type="button" data-name="Keyboard Fidgets">I want This</button>
           <button class="btn alt" type="button" onclick="addPhoto('1')">Add Photo</button>
           <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'1')"/>
         </div>
@@ -76,10 +76,10 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img2">🧊</div>
       <div class="content">
         <div class="row"><h3>Infinity Cube</h3><span class="badge">New</span></div>
-        <div class="row"><div class="price">$6.00</div></div>
+        <div class="row"><div class="price">$2.00</div></div>
         <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
         <div class="row">
-          <button class="btn buy" type="button" data-name="Infinity Cube">Reserve</button>
+          <button class="btn buy" type="button" data-name="Infinity Cube">I Want This</button>
           <button class="btn alt" type="button" onclick="addPhoto('2')">Add Photo</button>
           <input type="file" id="file2" accept="image/*" onchange="loadPhoto(event,'2')"/>
         </div>
@@ -90,10 +90,10 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img3">🔑</div>
       <div class="content">
         <div class="row"><h3>Name Keychain (Custom)</h3><span class="badge">Custom</span></div>
-        <div class="row"><div class="price">$5.00</div></div>
+        <div class="row"><div class="price">$1.00</div></div>
         <p class="desc">Pick your name and color. Ready next day.</p>
         <div class="row">
-          <button class="btn buy" type="button" data-name="Name Keychain (Custom)">Reserve</button>
+          <button class="btn buy" type="button" data-name="Name Keychain (Custom)">I want This</button>
           <button class="btn alt" type="button" onclick="addPhoto('3')">Add Photo</button>
           <input type="file" id="file3" accept="image/*" onchange="loadPhoto(event,'3')"/>
         </div>
@@ -104,10 +104,10 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img4">🎭</div>
       <div class="content">
         <div class="row"><h3>Frontman Mask</h3><span class="badge">Hot</span></div>
-        <div class="row"><div class="price">$8.00</div></div>
+        <div class="row"><div class="price">$10.00</div></div>
         <p class="desc">Angular and shiny. Perfect for costumes.</p>
         <div class="row">
-          <button class="btn buy" type="button" data-name="Frontman Mask">Reserve</button>
+          <button class="btn buy" type="button" data-name="Frontman Mask">I want This</button>
           <button class="btn alt" type="button" onclick="addPhoto('4')">Add Photo</button>
           <input type="file" id="file4" accept="image/*" onchange="loadPhoto(event,'4')"/>
         </div>
@@ -117,7 +117,7 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
 
   <section id="order">
     <form id="orderForm" action="https://formspree.io/f/mandqzzn" method="POST">
-      <h2>Reserve / Order</h2>
+      <h2>Buy / Order</h2>
       <div class="two">
         <div><label>Name:<input type="text" name="buyer" required></label></div>
         <div><label>Contact:<input type="text" name="contact" required></label></div>
