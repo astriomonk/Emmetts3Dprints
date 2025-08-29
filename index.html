@@ -43,6 +43,7 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
 </style>
 </head>
 <body>
+
 <header>
   <div class="wrap brand">
     <div class="logo"></div>
@@ -58,16 +59,16 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
   </section>
 
   <section class="grid" id="products">
+    <!-- Product cards -->
     <article class="card" data-id="1">
       <div class="media" id="img1">⌨️</div>
       <div class="content">
         <div class="row"><h3>Keyboard Fidgets</h3><span class="badge">Popular</span></div>
-        <div class="row"><div class="price">$4.00</div></div>
         <p class="desc">Clicky and satisfying! Great for focus.</p>
         <div class="row">
           <button class="btn buy" type="button" data-name="Keyboard Fidgets">Reserve</button>
           <button class="btn alt" type="button" onclick="addPhoto('1')">Add Photo</button>
-          <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'1')"/>
+          <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'1')" style="display:none;">
         </div>
       </div>
     </article>
@@ -76,12 +77,11 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img2">🧊</div>
       <div class="content">
         <div class="row"><h3>Infinity Cube</h3><span class="badge">New</span></div>
-        <div class="row"><div class="price">$6.00</div></div>
         <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
         <div class="row">
           <button class="btn buy" type="button" data-name="Infinity Cube">Reserve</button>
           <button class="btn alt" type="button" onclick="addPhoto('2')">Add Photo</button>
-          <input type="file" id="file2" accept="image/*" onchange="loadPhoto(event,'2')"/>
+          <input type="file" id="file2" accept="image/*" onchange="loadPhoto(event,'2')" style="display:none;">
         </div>
       </div>
     </article>
@@ -90,12 +90,11 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img3">🔑</div>
       <div class="content">
         <div class="row"><h3>Name Keychain (Custom)</h3><span class="badge">Custom</span></div>
-        <div class="row"><div class="price">$5.00</div></div>
         <p class="desc">Pick your name and color. Ready next day.</p>
         <div class="row">
           <button class="btn buy" type="button" data-name="Name Keychain (Custom)">Reserve</button>
           <button class="btn alt" type="button" onclick="addPhoto('3')">Add Photo</button>
-          <input type="file" id="file3" accept="image/*" onchange="loadPhoto(event,'3')"/>
+          <input type="file" id="file3" accept="image/*" onchange="loadPhoto(event,'3')" style="display:none;">
         </div>
       </div>
     </article>
@@ -104,12 +103,11 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <div class="media" id="img4">🎭</div>
       <div class="content">
         <div class="row"><h3>Frontman Mask</h3><span class="badge">Hot</span></div>
-        <div class="row"><div class="price">$8.00</div></div>
         <p class="desc">Angular and shiny. Perfect for costumes.</p>
         <div class="row">
           <button class="btn buy" type="button" data-name="Frontman Mask">Reserve</button>
           <button class="btn alt" type="button" onclick="addPhoto('4')">Add Photo</button>
-          <input type="file" id="file4" accept="image/*" onchange="loadPhoto(event,'4')"/>
+          <input type="file" id="file4" accept="image/*" onchange="loadPhoto(event,'4')" style="display:none;">
         </div>
       </div>
     </article>
@@ -120,7 +118,7 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
       <h2>Reserve / Order</h2>
       <div class="two">
         <div><label>Name:<input type="text" name="buyer" required></label></div>
-        <div><label>Contact:<input type="text" name="contact" required></label></div>
+        <div><label>Contact (email):<input type="email" name="_replyto" required></label></div>
       </div>
       <div class="two">
         <div>
@@ -136,6 +134,8 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
         <div><label>Qty:<input type="number" name="qty" min="1" value="1" required></label></div>
       </div>
       <label>Notes:<textarea name="details" rows="3"></textarea></label>
+      <input type="hidden" name="_subject" value="Thank you for your order!">
+      <input type="hidden" name="_autoresponse" value="Thank you for your order! We will prepare it and contact you shortly.">
       <button class="btn buy" type="submit">Send Order</button>
       <p id="statusMsg" style="display:none;color:#6be675;font-weight:bold;">Order sent successfully!</p>
     </form>
@@ -147,15 +147,14 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
 </main>
 
 <script>
+// Current year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Load photos from localStorage
+// Load photos
 window.addEventListener('load', () => {
   for(let i=1;i<=4;i++){
     const data = localStorage.getItem('productImg'+i);
-    if(data){
-      document.getElementById('img'+i).innerHTML=`<img src="${data}" style="width:100%;height:100%;object-fit:cover">`;
-    }
+    if(data){document.getElementById('img'+i).innerHTML=`<img src="${data}" style="width:100%;height:100%;object-fit:cover">`;}
   }
 });
 
@@ -164,13 +163,12 @@ document.querySelectorAll('.btn.buy[type="button"]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.getElementById('item').value = btn.dataset.name;
     window.scrollTo({top:document.getElementById('order').offsetTop-20,behavior:'smooth'});
+    document.querySelector('textarea[name="details"]').focus();
   });
 });
 
-// Add photo function
-function addPhoto(id){
-  document.getElementById('file'+id).click();
-}
+// Add photo
+function addPhoto(id){document.getElementById('file'+id).click();}
 function loadPhoto(event,id){
   const reader=new FileReader();
   reader.onload=function(e){
@@ -183,15 +181,10 @@ function loadPhoto(event,id){
 // Formspree AJAX
 const form = document.getElementById('orderForm');
 const statusMsg = document.getElementById('statusMsg');
-
 form.addEventListener('submit', async function(event){
   event.preventDefault();
   const data = new FormData(form);
-  const response = await fetch(form.action,{
-    method: form.method,
-    body: data,
-    headers:{'Accept':'application/json'}
-  });
+  const response = await fetch(form.action,{method: form.method,body: data,headers:{'Accept':'application/json'}});
   if(response.ok){
     statusMsg.style.display='block';
     form.reset();
