@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Shop — Student Seller</title>
+<style>
+:root{
+  --bg:#0f1115; --card:#161a22; --muted:#8b95a7; --text:#e8ecf3;
+  --brand:#6be675; --brand-2:#67b7ff; --accent:#ffcf5c; --danger:#ff6b6b;
+  --ring:0 0 0 3px #67b7ff33;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;background:linear-gradient(180deg,#0c0f14,#0f1115 25%,#0f1115);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+header{position:sticky;top:0;background:#0f1115cc;backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #202737;z-index:10;padding:16px;}
+header .brand{display:flex;gap:10px;align-items:center;font-weight:800;}
+header .brand .logo{width:34px;height:34px;border-radius:9px;background:conic-gradient(from 210deg at 50% 50%, #67b7ff, #6be675, #ffcf5c, #67b7ff);box-shadow:0 6px 20px #67b7ff33;}
+.wrap{max-width:1000px;margin:auto;padding:16px;}
+.hero{display:grid;gap:14px;padding:28px 16px 8px;}
+.hero h1{margin:0;font-size:clamp(22px,4vw,34px);}
+.hero p{margin:0;color:var(--muted);}
+.pill{padding:2px 8px;border-radius:999px;background:#172033;border:1px solid #2b3450;color:#cde1ff;font-size:12px;}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr);}
+@media (max-width:760px){.grid{grid-template-columns:repeat(6,1fr);}}
+.card{grid-column:span 6;background:var(--card);border:1px solid #202737;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s ease, box-shadow .12s ease;}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 28px #00000066;}
+.media{aspect-ratio:16/10;background:#121621;display:grid;place-items:center;font-size:52px;overflow:hidden;}
+.content{padding:14px;display:grid;gap:10px;}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.price{font-weight:800;}
+.badge{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #2a3142;color:#ccd6e8;background:#121621;}
+.desc{color:var(--muted);font-size:14px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:10px;border:1px solid #2a3142;background:#141a26;color:var(--text);cursor:pointer;}
+.btn:focus-visible{outline:none;box-shadow:var(--ring);}
+.btn.buy{background:linear-gradient(180deg,#1c7426,#0d5817);border-color:#1b7d2b;}
+.btn.alt{background:#141926;}
+form{display:grid;gap:10px;background:var(--card);border:1px solid #202737;border-radius:14px;padding:16px;margin-top:20px;}
+input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #2a3142;background:#111622;color:var(--text);}
+input:focus,select:focus,textarea:focus{outline:none;box-shadow:var(--ring);border-color:#3a4762;}
+.two{display:grid;gap:10px;grid-template-columns:1fr 1fr;}
+@media(max-width:640px){.two{grid-template-columns:1fr;}}
+footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-top:22px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap brand">
+    <div class="logo"></div>
+    <span>School Shop</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Stuff I Sell at School</h1>
+    <p>Keyboard fidgets, infinity cubes, name keychains, and Frontman masks. Quick pick-ups during passing periods and lunch!</p>
+    <span class="pill">Use the form below to reserve an item.</span>
+  </section>
+
+  <section class="grid" id="products">
+    <article class="card" data-id="1">
+      <div class="media" id="img1">⌨️</div>
+      <div class="content">
+        <div class="row"><h3>Keyboard Fidgets</h3><span class="badge">Popular</span></div>
+        <div class="row"><div class="price">$4.00</div></div>
+        <p class="desc">Clicky and satisfying! Great for focus.</p>
+        <div class="row">
+          <button class="btn buy" type="button" data-name="Keyboard Fidgets">Reserve</button>
+          <button class="btn alt" type="button" onclick="addPhoto('1')">Add Photo</button>
+          <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'1')"/>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-id="2">
+      <div class="media" id="img2">🧊</div>
+      <div class="content">
+        <div class="row"><h3>Infinity Cube</h3><span class="badge">New</span></div>
+        <div class="row"><div class="price">$6.00</div></div>
+        <p class="desc">Flip forever. Smooth hinges and pocket size.</p>
+        <div class="row">
+          <button class="btn buy" type="button" data-name="Infinity Cube">Reserve</button>
+          <button class="btn alt" type="button" onclick="addPhoto('2')">Add Photo</button>
+          <input type="file" id="file2" accept="image/*" onchange="loadPhoto(event,'2')"/>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-id="3">
+      <div class="media" id="img3">🔑</div>
+      <div class="content">
+        <div class="row"><h3>Name Keychain (Custom)</h3><span class="badge">Custom</span></div>
+        <div class="row"><div class="price">$5.00</div></div>
+        <p class="desc">Pick your name and color. Ready next day.</p>
+        <div class="row">
+          <button class="btn buy" type="button" data-name="Name Keychain (Custom)">Reserve</button>
+          <button class="btn alt" type="button" onclick="addPhoto('3')">Add Photo</button>
+          <input type="file" id="file3" accept="image/*" onchange="loadPhoto(event,'3')"/>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-id="4">
+      <div class="media" id="img4">🎭</div>
+      <div class="content">
+        <div class="row"><h3>Frontman Mask</h3><span class="badge">Hot</span></div>
+        <div class="row"><div class="price">$8.00</div></div>
+        <p class="desc">Angular and shiny. Perfect for costumes.</p>
+        <div class="row">
+          <button class="btn buy" type="button" data-name="Frontman Mask">Reserve</button>
+          <button class="btn alt" type="button" onclick="addPhoto('4')">Add Photo</button>
+          <input type="file" id="file4" accept="image/*" onchange="loadPhoto(event,'4')"/>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="order">
+    <form id="orderForm" action="https://formspree.io/f/mandqzzn" method="POST">
+      <h2>Reserve / Order</h2>
+      <div class="two">
+        <div><label>Name:<input type="text" name="buyer" required></label></div>
+        <div><label>Contact:<input type="text" name="contact" required></label></div>
+      </div>
+      <div class="two">
+        <div>
+          <label>Item:
+            <select name="item" id="item" required>
+              <option>Keyboard Fidgets</option>
+              <option>Infinity Cube</option>
+              <option>Name Keychain (Custom)</option>
+              <option>Frontman Mask</option>
+            </select>
+          </label>
+        </div>
+        <div><label>Qty:<input type="number" name="qty" min="1" value="1" required></label></div>
+      </div>
+      <label>Notes:<textarea name="details" rows="3"></textarea></label>
+      <button class="btn buy" type="submit">Send Order</button>
+      <p id="statusMsg" style="display:none;color:#6be675;font-weight:bold;">Order sent successfully!</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Student Seller</p>
+  </footer>
+</main>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Load photos from localStorage
+window.addEventListener('load', () => {
+  for(let i=1;i<=4;i++){
+    const data = localStorage.getItem('productImg'+i);
+    if(data){
+      document.getElementById('img'+i).innerHTML=`<img src="${data}" style="width:100%;height:100%;object-fit:cover">`;
+    }
+  }
+});
+
+// Reserve buttons
+document.querySelectorAll('.btn.buy[type="button"]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.getElementById('item').value = btn.dataset.name;
+    window.scrollTo({top:document.getElementById('order').offsetTop-20,behavior:'smooth'});
+  });
+});
+
+// Add photo function
+function addPhoto(id){
+  document.getElementById('file'+id).click();
+}
+function loadPhoto(event,id){
+  const reader=new FileReader();
+  reader.onload=function(e){
+    localStorage.setItem('productImg'+id,e.target.result);
+    document.getElementById('img'+id).innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover">`;
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+// Formspree AJAX
+const form = document.getElementById('orderForm');
+const statusMsg = document.getElementById('statusMsg');
+
+form.addEventListener('submit', async function(event){
+  event.preventDefault();
+  const data = new FormData(form);
+  const response = await fetch(form.action,{
+    method: form.method,
+    body: data,
+    headers:{'Accept':'application/json'}
+  });
+  if(response.ok){
+    statusMsg.style.display='block';
+    form.reset();
+  } else alert('Oops! Something went wrong.');
+});
+</script>
+</body>
+</html>
