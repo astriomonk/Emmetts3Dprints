@@ -71,7 +71,17 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
         </div>
       </div>
     </article>
-    
+    <article class="card" data-id="1">
+      <div class="media" id="img1">🐉</div>
+        <div class="content">
+          <div class="row"><h3>Dragon</h3><span class="badge">$9.99</span></div>
+          <p class="desc">articulated and perfect for your satisfaction.</p>
+          <button class="btn buy" type="button" data-name="Dragon">Order</button>
+          <button class="btn alt" type="button" onclick="addPhoto('1')">Add Photo</button>
+          <input type="file" id="file1" accept="image/*" onchange="loadPhoto(event,'1')" style="display:none;">
+        </div>
+    </div>
+    </article>
     <article class="card" data-id="1">
       <div class="media" id="img1">🎚️</div>
       <div class="content">
@@ -137,6 +147,7 @@ footer{padding:28px 16px;color:var(--muted);border-top:1px solid #202737;margin-
               <option>Name Keychain (Custom)</option>
               <option>Frontman Mask</option>
               <option>Custom (What do you want?)</option>
+              <option>Dragon</option>
             </select>
           </label>
         </div>
